@@ -1,0 +1,22 @@
+%nav.navbar.navbar-expand-sm.bg-light.navbar-light
+  .container
+    - if usuario_signed_in?
+      %h4.nav-item.dropdown
+        %a.nav-link.dropdown-toggle#navbardrop1{href: "#", data: { toggle: "dropdown" }, class:"text-white badge badge-pill badge-dark"} Sicoban
+        .dropdown-menu
+          = link_to 'Novo depósito', deposito_path, class:  'dropdown-item'
+          = link_to 'Novo saque', saque_path, class:  'dropdown-item'
+          = link_to 'Nova transferência', transferencia_path, class:  'dropdown-item'
+          = link_to "Listar agências bancárias", agencias_bancarias_path, class: 'dropdown-item'
+          = link_to "Listar contas bancárias", contas_bancarias_path, class: 'dropdown-item'
+      %ul.navbar-nav
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle#navbardrop2{href: "#", data: { toggle: "dropdown" } } Bem vindo <b>#{current_usuario.nome}</b>
+          .dropdown-menu
+            = link_to "Editar usuário", edit_usuario_registration_path, class: 'dropdown-item'
+            = link_to "Sair", destroy_usuario_session_path, method: :delete, class: 'dropdown-item'
+    - else
+      %h4.nav-item
+        %a.nav-link{style: "text-decoration:none", class:"text-white badge badge-pill badge-dark"} Sicoban
+      %ul.navbar-nav
+        %li= link_to "Administração", admin_root_path, class: 'nav-item nav-link'

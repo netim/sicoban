@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %title Sicoban (Sistema de Controle Bancário)
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+    = render 'layouts/header'
+    .container
+      - if !(current_page?('/') || current_page?('/login/'))
+        = link_to "Voltar", :back
+      = yield

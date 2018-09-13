@@ -1,0 +1,25 @@
+.row
+  .col-md-12
+    %h5
+      Movimentações bancárias (
+      =@movimentacao_bancaria.count
+      )
+    - if @movimentacao_bancaria.count > 0
+      %table.table.table-bordered.table-hover
+        =paginate @movimentacao_bancaria
+        %thead
+          %tr
+            %td Conta bancária
+            %td Data
+            %td Valor
+            %td Tipo de movimentação
+            %td
+        %tbody
+          - @movimentacao_bancaria.each do |mb|
+            %tr
+              %td= mb.numero_conta
+              %td= mb.data_movimentacao
+              %td= mb.valor
+              %td= mb.tipo_movimentacao
+              - if mb.tipo_movimentacao == 'Transferência'
+                %td= link_to 'Estornar', estorno_path + "/" + mb.id.to_s

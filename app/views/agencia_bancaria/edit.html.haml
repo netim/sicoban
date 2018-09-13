@@ -1,0 +1,8 @@
+.row
+%aside.col-md-12
+  = simple_form_for(@agencia) do |f|
+    .form-group
+      = render 'shared/error_messages', object: f.object
+      = f.input :numero, label: 'Número da agência'
+      = f.input :endereco, label: 'Endereço'
+      = f.submit "Salvar", class: "btn btn-primary"

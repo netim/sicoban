@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    = button_to "Adicionar conta", new_conta_bancarium_path, class: "btn", method: :get
+    - if @conta_bancaria.count > 0
+      %table.table.table-bordered.table-hover
+        =paginate @conta_bancaria
+        %thead
+          %tr
+            %td Agência bancária
+            %td Número da conta
+            %td Limite
+            %td
+            %td
+        %tbody
+          - @conta_bancaria.each do |cb|
+            %tr
+              %td= cb.numero_agencia
+              %td= cb.numero
+              %td= cb.limite
+              %td= link_to 'Editar', edit_conta_bancarium_path(cb.id)
+              %td= link_to 'Excluir', conta_bancarium_path(cb.id), method: :delete, data: {confirm: "Tem certeza?"}

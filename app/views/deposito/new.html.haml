@@ -1,0 +1,10 @@
+.row
+  %aside.col-md-12
+    = simple_form_for(@movimentacao_bancaria, method: :post, url: deposito_url) do |f|
+      .form-group
+        = render 'shared/error_messages', object: f.object
+        = f.input :numero_conta, collection: @saldos, label_method: :first, value_method: :second, include_blank: false, label: 'Conta', input_html: { id: 'conta' }
+        = f.input :tipo_movimentacao, as: :hidden, input_html: { value: 'Depósito' }
+        = f.input :usuario, as: :hidden, input_html: { value: current_usuario.id }
+        = f.input :valor
+        = f.submit "Salvar", class: "btn btn-primary"

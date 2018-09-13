@@ -1,0 +1,2 @@
+class SicobanController < ApplicationController
+end

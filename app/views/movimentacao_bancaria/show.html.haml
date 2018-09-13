@@ -1,0 +1,19 @@
+.row
+  .col-md-12
+    %table.table.table-bordered.table-hover
+      %thead
+        %tr
+          %td Conta bancária
+          %td Data
+          %td Valor
+          %td Tipo de movimentação
+          - if @movimentacao_bancaria.tipo_movimentacao == 4
+            %td Estonar?
+      %tbody
+        %tr
+          %td= @movimentacao_bancaria.numero_conta
+          %td= @movimentacao_bancaria.data_movimentacao
+          %td= @movimentacao_bancaria.valor
+          %td= @movimentacao_bancaria.tipo_movimentacao
+          - if @movimentacao_bancaria.tipo_movimentacao == 4
+            %td= link_to 'Estornar', estorno_path + "/" + @movimentacao_bancaria.id.to_s

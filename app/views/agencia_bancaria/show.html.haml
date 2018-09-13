@@ -1,0 +1,19 @@
+.row
+  .col-md-12
+    = button_to "Adicionar agência", new_agencia_bancarium_path, class: "btn", method: :get
+    - if @agencia.count > 0
+      %table.table.table-bordered.table-hover
+        =paginate @agencia
+        %thead
+          %tr
+            %td Número da agência
+            %td Endereço
+            %td
+            %td
+        %tbody
+          - @agencia.each do |a|
+            %tr
+              %td= a.numero
+              %td= a.endereco
+              %td= link_to 'Editar', edit_agencia_bancarium_path(a.id)
+              %td= link_to 'Excluir', agencia_bancarium_path(a.id), method: :delete, data: {confirm: "Tem certeza?"}

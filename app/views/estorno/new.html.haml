@@ -1,0 +1,8 @@
+.row
+  %aside.col-md-12
+    = simple_form_for(@movimentacao_bancaria, method: :post, url: estorno_url) do |f|
+      .form-group
+        = 'Confirmar estorno?'
+        = render 'shared/error_messages', object: f.object
+        = f.input :id, as: :hidden, input_html: { value: @movimentacao_bancaria.id }
+        = f.submit "Estornar", class: "btn btn-primary"

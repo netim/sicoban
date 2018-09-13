@@ -1,0 +1,9 @@
+.row
+  %aside.col-md-12
+    = simple_form_for(@movimentacao_bancaria) do |f|
+      .form-group
+        = render 'shared/error_messages', object: f.object
+        = f.association :conta_bancaria, collection: ContaBancaria.active.order(:numero), prompt: "Conta bancária"
+        = f.input :valor
+        = f.label :tipo_movimentacao, collection: TipoMovimentacao.active.order(:tipo), prompt: "Tipo de movimentação"
+        = f.submit "Salvar", class: "btn btn-primary"

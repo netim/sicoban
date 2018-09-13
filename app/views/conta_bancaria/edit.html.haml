@@ -1,0 +1,9 @@
+.row
+%aside.col-md-12
+  = simple_form_for(@conta_bancaria) do |f|
+    .form-group
+      = render 'shared/error_messages', object: f.object
+      = f.input :numero_agencia, collection: @agencias, include_blank: false, label: 'Agência bancária'
+      = f.input :numero, label: 'Número da conta'
+      = f.input :limite
+      = f.submit "Salvar", class: "btn btn-primary"

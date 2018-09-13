@@ -1,0 +1,23 @@
+.row
+  %aside.col-md-12
+    = simple_form_for(@movimentacao_bancaria, method: :post, url: saque_url) do |f|
+      .form-group
+        = render 'shared/error_messages', object: f.object
+        = f.input :numero_conta, collection: @saldos, label_method: :first, value_method: :second, include_blank: false, label: 'Conta', input_html: { id: 'conta' }
+        = f.input :tipo_movimentacao, as: :hidden, input_html: { value: 'Saque' }
+        = f.input :usuario, as: :hidden, input_html: { value: current_usuario.id }
+        = f.input :valor, input_html: { max: @saldos[0][2] > @saldos[0][3] ? @saldos[0][3] : @saldos[0][2], step: 1, disabled:  @saldos[0][2] <= 0}
+        = f.submit "Salvar", class: "btn btn-primary"
+        :javascript
+          function validaSaque(){
+            var sel = document.getElementsByTagName("select")[0];
+            var texto = sel.options[sel.selectedIndex].text;
+            var saldo = /saldo: ([-]?(\d+\.)?(\d*))/.exec(texto)[1];
+            var limite = /limite: ([-]?(\d+\.)?(\d*))/.exec(texto)[1];
+            var valor = document.getElementById("movimentacao_bancaria_valor");
+            valor.max = saldo > limite ? limite : saldo;
+             if (Number(valor.value) > Number(valor.max)) {
+             valor.value = valor.max ;
+             }
+          }
+          $(document).on('change', 'select', validaSaque);

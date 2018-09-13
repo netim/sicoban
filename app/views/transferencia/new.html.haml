@@ -1,0 +1,27 @@
+.row
+  %aside.col-md-12
+    = simple_form_for(@movimentacao_bancaria, method: :post, url: transferencia_url) do |f|
+      .form-group
+        - @movimentacao_bancaria.each_with_index do |movimentacao, index|
+          = render 'shared/error_messages', object: f.object
+          = f.simple_fields_for 'transferencias[]',movimentacao do |m|
+            = m.input :numero_conta, collection: @saldos, label_method: :first, value_method: :second, include_blank: false, label: 'Conta '+(index+1).to_s, input_html: { id: 'conta' }
+            = m.input :tipo_movimentacao, as: :hidden, input_html: { value: 'Transferência' }
+            = m.input :usuario, as: :hidden, input_html: { value: current_usuario.id }
+        = f.input :valor, input_html: { max: @saldos[0][2] > @saldos[0][3] ? @saldos[0][3] : @saldos[0][2], step: 1, disabled:  @saldos[0][2] <= 0}
+        = f.submit "Salvar", class: "btn btn-primary"
+      :javascript
+        function validaConta(){
+          var sel = document.getElementsByTagName("select")[0];
+          var texto = sel.options[sel.selectedIndex].text;
+          var saldo = /saldo: ([-]?(\d+\.)?(\d*))/.exec(texto)[1];
+          var limite = /limite: ([-]?(\d+\.)?(\d*))/.exec(texto)[1];
+          var valor = document.getElementById("movimentacao_bancaria_valor");
+          valor.max = Number(saldo) > Number(limite) ? limite : saldo;
+           if (Number(saldo) == 0) {
+            valor.disabled = true;
+           } else {
+            valor.disabled = false;
+           }
+        }
+        $(document).on('change', 'select', validaConta);

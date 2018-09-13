@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="d-flex justify-content-center">
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= f.input :email,
+                    label: "E-mail",
+                    required: false,
+                    autofocus: true,
+                    input_html: { autocomplete: "email", class: "form-control" },
+                    wrapper_html: { class: 'form-group' } %>
+        <%= f.input :password,
+                    label: "Senha",
+                    required: false,
+                    input_html: { autocomplete: "current-password", class: "form-control" },
+                    wrapper_html: { class: 'form-group' } %>
+        <%= f.input :remember_me,
+                    label: "Lembrar",
+                    input_html: { class: "form-check-input" },
+                    label_input: { class: "form-check-label" },
+                    wrapper_html: { class: 'form-group form-check' },
+                    as: :boolean if devise_mapping.rememberable? %>
+        <div class="form-actions">
+          <%= f.button :submit, "Entrar",
+                        wrapper_html: { class: "btn btn-primary" } %>
+        </div>
+      <% end %>
+  </div>
+  <%= render "devise/shared/links" %>
+</div>
