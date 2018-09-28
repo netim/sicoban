@@ -45,7 +45,7 @@ bundle exec rspec
 * Devise para autenticação e autorização;
 * Simple_form personalização de formulário;
 * Haml para simplificação do código HTML nas páginas criadas manualmente;
-* Pg para banco Postgresql (banco *icoban*, usuário *postgres* e senha *123456*). Tutoriais podem ser encontrados [aqui](https://www.digitalocean.com/community/tutorials/como-instalar-e-utilizar-o-postgresql-no-ubuntu-16-04-pt) e [aqui](https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-ruby-on-rails-application-on-ubuntu-14-04).
+* Pg para banco Postgresql (banco *sicoban*, usuário *postgres* e senha *123456*). Tutoriais podem ser encontrados [aqui](https://www.digitalocean.com/community/tutorials/como-instalar-e-utilizar-o-postgresql-no-ubuntu-16-04-pt) e [aqui](https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-ruby-on-rails-application-on-ubuntu-14-04).
 * RSpec para testes.
 
 ## Agradecimentos
